@@ -40,7 +40,11 @@
 }
 
 .next-player{
-  font-size: 27px;
+  font-size: 20px;
+}
+
+.winner{
+  font-size: 30px;
 }
 
 .step-number{
@@ -48,7 +52,8 @@
 }
 
 .label{
-  width:120px;
+  width:150px;
+  margin: auto;
 }
 
 .square {
@@ -64,6 +69,17 @@
   padding: 0;
   text-align: center;
   width: 34px;
+}
+.tie{
+  color: green;
+}
+
+.playermark-x{
+  color: red;
+}
+
+.playermark-o{
+  color: blue;
 }
 
 .square:focus {

@@ -6,18 +6,11 @@ class Main extends Component {
 	render(){
 		const squares = this.state.squares;
 		const winner = calculateWinner(squares);
-		
-		let status;
-		if(winner){
-			status = 'Winner: ' + winner;
-		}else{
-			status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-		}
 
 		return (
 			<div>
 			<div className="game">
-				<Menu status={status} stepNumber={this.state.stepNumber} numberOfRows={this.state.numberOfRows} handleChangeNumberOfRows={(e) => this.handleChangeNumberOfRows(e)} numberOfColumns={this.state.numberOfColumns} handleChangeNumberOfColumns={(e) => this.handleChangeNumberOfColumns(e)} startNewGame={this.startNewGame}/>
+				<Menu winner={winner} xIsNext={this.state.xIsNext} stepNumber={this.state.stepNumber} numberOfRows={this.state.numberOfRows} handleChangeNumberOfRows={(e) => this.handleChangeNumberOfRows(e)} numberOfColumns={this.state.numberOfColumns} handleChangeNumberOfColumns={(e) => this.handleChangeNumberOfColumns(e)} playerNameX={this.state.playerNameX} handleChangeNamePlayerX={(e) => this.handleChangeNamePlayerX(e)} playerNameO={this.state.playerNameO} handleChangeNamePlayerO={(e) => this.handleChangeNamePlayerO(e)} startNewGame={this.startNewGame}/>
 				<div className="game-board">
 					<Board numberOfColumns={this.state.numberOfColumns} numberOfRows={this.state.numberOfRows} squares={squares} handleClick={(r, i) => this.handleClick(r, i)}/>
 			 	</div>
@@ -34,7 +27,9 @@ class Main extends Component {
 			stepNumber: 0,
 			numberOfColumns: 10,
 			numberOfRows: 10,
-			isEnd: false
+			isEnd: false,
+			playerNameX: 'X',
+			playerNameO: 'O',
 		}
 	};
 
@@ -43,7 +38,7 @@ class Main extends Component {
 			xIsNext: true,
 			squares: Array(this.state.numberOfRows).fill(Array(this.state.numberOfColumns).fill(null)),
 			stepNumber: 0,
-			isEnd: false
+			isEnd: false,
 		});
 	};
 
@@ -60,6 +55,20 @@ class Main extends Component {
 		this.setState({
 			squares: Array(this.state.numberOfRows).fill(Array(value).fill(null)),
 			numberOfColumns: value
+		});
+	};
+	
+	handleChangeNamePlayerX = (e)=>{
+		let value = e.target.value;
+		this.setState({
+			playerNameX: value,
+		});
+	};
+	
+	handleChangeNamePlayerO = (e)=>{
+		let value = e.target.value;
+		this.setState({
+			playerNameO: value,
 		});
 	};
 
